@@ -3,7 +3,7 @@ import { LOGOUT_USER, AUTH_USER } from "./types";
 
 export function auth() {
   const request = axios
-    .get(`api/user/auth`, { withCredentials: true })
+    .get(`/api/user/auth`, { withCredentials: true })
     .then(response => response.data);
 
   return {
@@ -14,7 +14,7 @@ export function auth() {
 
 export function logoutUser() {
   const request = axios
-    .post(`api/user/logout`, { withCredentials: true })
+    .post(`/api/user/logout`, { withCredentials: true })
     .then(response => response.data);
 
   return {

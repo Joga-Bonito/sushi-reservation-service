@@ -26,10 +26,12 @@ const CarouselContainer = styled.div`
 const ReservationContainer = styled.div``;
 
 const Home = () => {
+  //토요일일 경우엔 다음날이 일요일이니까 일요일은 건너뛰고 월요일 출력
+  //나머지 요일엔 그냥 다음날 출력
   const [selectedDay, setSelectedDay] = useState(
-    moment().day() === 0
-      ? moment().add(1, "days").format("YYYY-MM-DD")
-      : moment().format("YYYY-MM-DD")
+    moment().day() === 6
+      ? moment().add(2, "days").format("YYYY-MM-DD")
+      : moment().add(1, "days").format("YYYY-MM-DD")
   );
 
   return (

@@ -1,5 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { Route, Switch } from "react-router-dom";
+import Reservations from "./Reservations";
+import { Link } from "react-router-dom";
+import Reserved from "./Reserved";
 
 const AdminBlock = styled.div`
   background-color: #eee;
@@ -111,7 +115,11 @@ const ListContainer = styled.div`
     word-break: break-all;
   }
 `;
-const NavigationItem = styled.div``;
+const NavigationItem = styled.div`
+  a {
+    text-decoration: none;
+  }
+`;
 
 const PageBody = styled.div``;
 
@@ -124,12 +132,20 @@ const AdminHome = ({ user }) => {
         </PageTitle>
         <NavigationContainer>
           <NavigationWrapper>
-            <NavigationItem>링크</NavigationItem>
+            <NavigationItem>
+              <Link to="/admin/reservations">입금 전 내역</Link>
+              <Link to="/admin/reserved">예약 완료 내역</Link>
+            </NavigationItem>
           </NavigationWrapper>
         </NavigationContainer>
       </PageHeader>
       <PageBody>
-        <ListContainer>라우트</ListContainer>
+        <ListContainer>
+          <Switch>
+            <Route path="/admin/reservations" component={Reservations} />
+            <Route path="/admin/reserved" component={Reserved} />
+          </Switch>
+        </ListContainer>
       </PageBody>
     </AdminBlock>
   );

@@ -113,23 +113,24 @@ const NextButton = styled.span`
 `;
 
 const Calendar = ({ selectedDay, setSelectedDay }) => {
-  const [calendar_days, setCalendar_days] = useState([]);
+  const [calendarDays, setCalendarDays] = useState([]);
 
   useEffect(() => {
     //create days array
     const week = ["일", "월", "화", "수", "목", "금", "토"];
-    let temp_array = [];
-    for (let i = 0; i < 14; i++) {
-      if (week[moment().add(i, "days").day()] !== "일") {
+    let tempArray = [];
+    for (let i = 1; i < 15; i++) {
+      let addDays = moment().add(i, "days");
+      if (addDays.day() !== 0) {
         //일요일 휴무 기준.
-        temp_array.push({
-          date: moment().add(i, "days").format("YYYY-MM-DD"),
-          dayOfTheWeek: week[moment().add(i, "days").day()]
+        tempArray.push({
+          date: addDays.format("YYYY-MM-DD"),
+          dayOfTheWeek: week[addDays.day()]
         });
       }
     }
-    setCalendar_days(temp_array);
-  }, [selectedDay]);
+    setCalendarDays(tempArray);
+  }, []);
 
   //slide setting
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -170,9 +171,9 @@ const Calendar = ({ selectedDay, setSelectedDay }) => {
         translateRange={(slideItemWidth / 7) * currentSlide}
       >
         <ul>
-          {calendar_days.length === 0
+          {calendarDays.length === 0
             ? "예약 가능한 날짜가 없습니다."
-            : calendar_days.map((val, idx) =>
+            : calendarDays.map((val, idx) =>
                 val.date === selectedDay ? (
                   <li
                     key={idx}

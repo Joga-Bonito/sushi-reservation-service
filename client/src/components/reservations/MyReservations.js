@@ -126,7 +126,7 @@ const MyReservations = ({ user }) => {
       try {
         const data = await axios.post(
           `api/list/getDataByConditions`,
-          { email: user?.email, cancel: tabValue },
+          { email: user?.email, confirm: tabValue },
           {
             withCredentials: true
           }
@@ -158,7 +158,7 @@ const MyReservations = ({ user }) => {
                   setTabValue(0);
                 }}
               >
-                예약 내역
+                입금 전
               </span>
               <span
                 className={tabValue === 1 ? "selected" : ""}
@@ -166,7 +166,7 @@ const MyReservations = ({ user }) => {
                   setTabValue(1);
                 }}
               >
-                취소 내역
+                예약 완료
               </span>
             </NavigationItem>
           </NavigationWrapper>
