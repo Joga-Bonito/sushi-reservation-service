@@ -101,6 +101,11 @@ const RegisterBlock = styled.div`
             display: inherit;
         }
     }
+    
+    input.invalid:invalid {
+      border-color: red;
+    }
+    
 `;
 
 const Register = props => {
@@ -110,9 +115,30 @@ const Register = props => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const onBlur = e => {
+    if (!e.target.validity.valid) {
+      e.target.className = "invalid";
+    } else {
+      e.target.className = "";
+    }
+  };
+
+  const onFocus = e => {
+    if (!e.target.validity.valid) {
+      e.target.className = "invalid";
+    } else {
+      e.target.className = "";
+    }
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-
+    for (let i = 1; i < e.target.length - 1; i++) {
+      if (!e.target[i].validity.valid) {
+        e.target[i].focus();
+        return alert(`${e.target[i].id}를 확인하세요`);
+      }
+    }
     if (password !== confirmPassword) {
       alert("비밀번호가 다름");
       return;
@@ -132,9 +158,12 @@ const Register = props => {
           //props.history.push("/login");
           alert("Register success");
           window.location.replace("/");
-        } else {
-          alert("입력 정보를 확인해주세요");
-          document.getElementById("email").focus();
+        }
+      })
+      .catch(err => {
+        if (err.response.status === 409) {
+          document.getElementById(err.response.data.errSubject).focus();
+          return alert(err.response.data.errMessaage);
         }
       });
   };
@@ -154,38 +183,41 @@ const Register = props => {
                     <input
                       type="text"
                       id="name"
-                      required
                       placeholder="Enter your name"
                       value={name}
                       onChange={e => {
                         setName(e.target.value);
                       }}
+                      minLength="3"
+                      maxLength="10"
+                      required
                     />
                   </div>
                   <div className="inputWrap">
                     <label>이메일</label>
                     <input
-                      type="text"
+                      type="email"
                       placeholder="Enter your email"
                       value={email}
                       onChange={e => {
                         setEmail(e.target.value);
                       }}
                       autoCapitalize="none"
-                      required
                       id="email"
+                      onBlur={onBlur}
+                      required
                     />
                   </div>
                   <div className="inputWrap">
                     <label>핸드폰 번호</label>
                     <input
-                      type="text"
+                      type="tel"
                       placeholder="Enter your phone number"
+                      pattern="[0-9]{3}[0-9]{4}[0-9]{4}||[0-9]{3}-[0-9]{4}-[0-9]{4}"
                       value={phoneNumber}
                       onChange={e => {
                         setPhoneNumber(e.target.value);
                       }}
-                      autoCapitalize="none"
                       required
                       id="phoneNumber"
                     />
@@ -194,26 +226,32 @@ const Register = props => {
                     <label>비밀번호</label>
                     <input
                       type="password"
-                      required
                       id="password"
                       placeholder="Enter your password"
                       value={password}
                       onChange={e => {
                         setPassword(e.target.value);
                       }}
+                      onFocus={onFocus}
+                      required
+                      minLength="8"
+                      maxLength="15"
                     />
                   </div>
                   <div className="inputWrap">
                     <label>비밀번호 확인</label>
                     <input
                       type="password"
-                      required
                       id="confirmPassword"
                       placeholder="Enter your confirmPassword"
                       value={confirmPassword}
                       onChange={e => {
                         setConfirmPassword(e.target.value);
                       }}
+                      onFocus={onFocus}
+                      required
+                      minLength="8"
+                      maxLength="15"
                     />
                   </div>
                 </div>
@@ -222,6 +260,7 @@ const Register = props => {
                     type="submit"
                     className="btn submit"
                     value="회원가입"
+                    formNoValidate
                   />
                 </div>
               </fieldset>

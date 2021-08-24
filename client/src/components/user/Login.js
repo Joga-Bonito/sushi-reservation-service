@@ -121,9 +121,12 @@ const Login = props => {
           //props.history.push("/login");
           alert("Login success");
           window.location.replace("/");
-        } else {
-          alert(response.data.err);
-          document.getElementById("email").focus();
+        }
+      })
+      .catch(err => {
+        if (err.response.status === 409) {
+          document.getElementById(err.response.data.errSubject).focus();
+          return alert(err.response.data.errMessaage);
         }
       });
   };
@@ -142,7 +145,7 @@ const Login = props => {
                 <div className="inputWrap">
                   <label>이메일</label>
                   <input
-                    type="text"
+                    type="email"
                     placeholder="Enter your email"
                     value={email}
                     onChange={e => {
