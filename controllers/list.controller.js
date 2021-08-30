@@ -45,7 +45,6 @@ exports.getNumofpeople = async (req, res, next) => {
   try {
     const data = await ListService.getNumofpeople(req.body);
     let numofpeople = data?.numofpeople ? parseInt(data.numofpeople) : 0;
-    console.log(data);
     res.status(200).send({ numofpeople });
   } catch (err) {
     next(err);
