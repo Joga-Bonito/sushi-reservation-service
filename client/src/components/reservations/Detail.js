@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const Content = styled.div`
   margin: 0 auto;
@@ -15,19 +16,7 @@ const RvDetail = styled.div`
   max-width: 1024px;
   min-height: 1000px;
   margin: 0 auto;
-  div {
-  }
-  p {
-    font-size: 20px;
-    font-weight: 700;
-    margin: 0;
-    padding: 0;
-    word-break: break-all;
-  }
-  span {
-    font-size: 10px;
-    color: #999;
-  }
+
   select {
     width: 200px; /* 원하는 너비설정 */
     padding: 0.8em 0.5em; /* 여백으로 높이 설정 */
@@ -41,6 +30,18 @@ const Section = styled.div`
   padding: 30px 0;
   margin: 0 20px;
   border-bottom: 1px solid #ddd;
+
+  p {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    word-break: break-all;
+  }
+  span {
+    font-size: 10px;
+    color: #999;
+  }
 
   @media only screen and (min-width: 1024px) {
     padding: 50px 0;
@@ -159,23 +160,20 @@ const Detail = props => {
   const time = props.location.state.time;
 
   useEffect(() => {
-    let tempNum = 0;
-
     async function getNumofpeople() {
       const data = await axios.post(
-        "api/list/getData",
-        { bookTime: date + " " + time, confirm: 1 },
+        "/api/list/getNumofpeople",
+        {
+          bookTime: moment(date + " " + time).format("YYYY-MM-DD HH:mm:ss"),
+          confirm: 1
+        },
         { withCredentials: true }
       );
 
-      data.data.reservations.forEach(val => {
-        tempNum += parseInt(val.numofpeople);
-      });
-
-      setNumofpeople(tempNum);
+      setNumofpeople(parseInt(data.data.numofpeople));
     }
     getNumofpeople();
-  }, []);
+  }, [date, time]);
 
   const Selects = () => {
     let element = [];

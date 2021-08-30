@@ -50,12 +50,10 @@ exports.create = async (req, res, next) => {
     const emailDuplicateCheck = await UserService.findUserByEmail(user.email);
     // if(emailDuplicateCheck) errorGenerator({ statusCode: 409, message: 'duplicated' })
     if (emailDuplicateCheck)
-      return res
-        .status(409)
-        .send({
-          errMessaage: "이미 가입한 email 입니다.",
-          errSubject: "email"
-        });
+      return res.status(409).send({
+        errMessaage: "이미 가입한 email 입니다.",
+        errSubject: "email"
+      });
 
     const createdUser = await UserService.createUser(user);
 
@@ -84,12 +82,10 @@ exports.read = async (req, res, next) => {
     );
 
     if (!passwordCheck)
-      return res
-        .status(409)
-        .send({
-          errMessaage: "비밀번호가 일치하지 않습니다.",
-          errSubject: "password"
-        });
+      return res.status(409).send({
+        errMessaage: "비밀번호가 일치하지 않습니다.",
+        errSubject: "password"
+      });
 
     //sign메소드를 통해 access token 발급!
     const token = jwt.sign({ email, name }, secretKey, jwtOptions);
@@ -131,7 +127,7 @@ exports.auth = (req, res) => {
     const token = cookies["jwt"];
     jwt.verify(token, secretKey, (err, decoded) => {
       if (!err && decoded.email) {
-        if (decoded.email === "guti.h.z950@gmail.com") {
+        if (decoded.email === "admin@admin.com") {
           res.send({
             isAuth: true,
             text: "Admin logged in",

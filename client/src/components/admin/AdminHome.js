@@ -1,16 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import { Route, Switch } from "react-router-dom";
-import Reservations from "./Reservations";
-import { Link } from "react-router-dom";
-import Reserved from "./Reserved";
+import ReservationManagement from "./reservationManagement";
+import { NavLink } from "react-router-dom";
+import UserManagement from "./userManagement";
+import RefundManagement from "./refundManagement";
 
 const AdminBlock = styled.div`
-  background-color: #eee;
   margin: 0 auto;
   max-width: 1024px;
   @media (min-width: 1024px) {
     background-color: white;
+  }
+  ol,
+  ul,
+  li {
+    list-style: none;
   }
 `;
 const PageHeader = styled.div`
@@ -22,106 +27,34 @@ const PageTitle = styled.div`
     font-size: 24px;
   }
 `;
-const NavigationContainer = styled.div`
-  padding: 0px;
-  line-height: 40px;
-  background-color: white;
-  span {
-    cursor: pointer;
-    padding: 5px 5px;
-    font-size: 20px;
-    margin-right: 10px;
-    position: relative;
-  }
-  span.selected {
-    border-bottom: 3px solid #ffc645;
-    font-weight: 700;
-  }
-  @media only screen and (min-width: 1024px) {
-    /* background-color: #fafafa; */
-    background-color: white;
-  }
-`;
+const NavigationContainer = styled.div``;
 const NavigationWrapper = styled.div`
   padding-top: 20px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
-  span {
-    font-size: 18px;
-    margin: 0 10px;
-  }
-  @media only screen and (min-width: 1024px) {
-    padding: 14px 20px;
-    max-width: 1024px;
-    margin: 0 auto;
-    span {
-      font-size: 18px;
-      margin: 0 20px;
-    }
-  }
-
-  span:first-child {
-    margin-left: 0;
-  }
+  justify-content: flex-start;
 `;
 
-const ListContainer = styled.div`
-  ol,
-  ul,
-  li {
-    list-style: none;
-    margin-bottom: 20px;
-    background-color: white;
-    padding: 20px;
-    font-size: 14px;
-  }
-  @media (min-width: 1024px) {
-    ul > li {
-      border: 1px solid #ddd;
-      border-radius: 10px;
-    }
-  }
-  span {
-    color: #333;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  div.rv_date {
-    display: flex;
-    align-items: center;
-    margin: 5px 0;
-  }
-  div.rv_option {
-    font-size: 11px;
-    color: #999;
-    margin-top: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-  }
-  div.rv_status {
-    display: flex;
-    flex-wrap: wrap;
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
-    margin-top: 10px;
-  }
-  p {
-    margin: 0;
-    padding: 0;
-    word-break: break-all;
-  }
-`;
 const NavigationItem = styled.div`
+  display: flex;
   a {
     text-decoration: none;
+    padding: 10px 32px;
+    font-family: sans-serif;
+    color: #606060;
+  }
+  a.active {
+    color: #030303;
+    border-bottom: 2px #606060 solid;
+  }
+  a:hover {
+    color: #030303;
   }
 `;
 
 const PageBody = styled.div``;
+
+const ListContainer = styled.div``;
 
 const AdminHome = ({ user }) => {
   return (
@@ -133,8 +66,18 @@ const AdminHome = ({ user }) => {
         <NavigationContainer>
           <NavigationWrapper>
             <NavigationItem>
-              <Link to="/admin/reservations">입금 전 내역</Link>
-              <Link to="/admin/reserved">예약 완료 내역</Link>
+              <NavLink
+                to="/admin/reservationManagement"
+                activeClassName="active"
+              >
+                예약 관리
+              </NavLink>
+              <NavLink to="/admin/refundManagement" activeClassName="active">
+                환불 관리
+              </NavLink>
+              <NavLink to="/admin/usersManagement" activeClassName="active">
+                회원 관리
+              </NavLink>
             </NavigationItem>
           </NavigationWrapper>
         </NavigationContainer>
@@ -142,8 +85,15 @@ const AdminHome = ({ user }) => {
       <PageBody>
         <ListContainer>
           <Switch>
-            <Route path="/admin/reservations" component={Reservations} />
-            <Route path="/admin/reserved" component={Reserved} />
+            <Route
+              path="/admin/reservationManagement"
+              component={ReservationManagement}
+            />
+            <Route
+              path="/admin/refundManagement"
+              component={RefundManagement}
+            />
+            <Route path="/admin/usersManagement" component={UserManagement} />
           </Switch>
         </ListContainer>
       </PageBody>

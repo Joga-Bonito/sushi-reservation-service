@@ -4,7 +4,6 @@ import axios from "axios";
 
 const SettingBlock = styled.div`
   padding: 0 20px;
-
   input {
     padding: 15px 10px;
     border-radius: 6px;
@@ -255,7 +254,7 @@ const Setting = ({ user }) => {
                 type="text"
                 name="accountOwner"
                 value={accountOwner}
-                maxLength="35"
+                maxLength="10"
                 onChange={onChange}
               />
             </div>

@@ -160,7 +160,8 @@ const Login = props => {
                   <label>비밀번호</label>
                   <input
                     type="password"
-                    requiredid="password"
+                    required
+                    id="password"
                     placeholder="Enter your password"
                     value={pwd}
                     onChange={e => {

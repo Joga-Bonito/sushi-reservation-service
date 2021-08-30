@@ -89,7 +89,7 @@ const ReservationList = ({ selectedDay }) => {
     async () => {
       try {
         const data = await axios.post(
-          `api/list/getData`,
+          `/api/list/getData`,
           { bookDate: selectedDay, confirm: 1 }, //TODO : 관리자 페이지 만들면 confirm 1로 바꿔줘야댐
           {
             withCredentials: true

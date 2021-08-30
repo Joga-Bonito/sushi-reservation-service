@@ -35,6 +35,17 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         comment: "예약한 날짜 (예약 날짜 별로 그룹핑 해야되서 만듬)"
       },
+      depositCompleted: {
+        field: "depositCompleted",
+        type: Sequelize.BOOLEAN,
+        defaultValue: 0,
+        comment: "입금 확인 내역을 표시하기 위함"
+      },
+      depositCompletedAt: {
+        field: "depositCompletedAt",
+        type: Sequelize.DATE,
+        comment: "admin이 입금 확인한 시간"
+      },
       confirmTime: {
         field: "confirmTime",
         type: Sequelize.DATE,
