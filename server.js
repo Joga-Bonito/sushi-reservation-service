@@ -19,12 +19,12 @@ app.use(express.json()); //json으로 이뤄진 request.body를 제대로 읽기
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true })); //Express의 내장 미들웨어 함수. urlencoded 페이로드로 들어오는 요청을 구문 분석하고 본문 구문 분석기를 기반으로합니다.
 
-app.use(express.static(path.join(__dirname, "client/build")));
+app.use(express.static(path.resolve(__dirname, "client/build")));
 app.use(routes);
 
 app.get("/", (req, res) => {
   res.sendFile(
-    path.join(__dirname, "client/build", "index.html"),
+    path.resolve(__dirname, "client/build", "./index.html"),
     function (err) {
       if (err) {
         res.status(500).send(err);
