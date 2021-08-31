@@ -197,7 +197,7 @@ const Detail = props => {
     let dataToSubmit = {
       email: props.user.email,
       numofpeople: selectedNum,
-      bookTime: date + " " + time,
+      bookTime: new Date(date + " " + time),
       bookDate: date,
       insert_At: "now()"
     };
