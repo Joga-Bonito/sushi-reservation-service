@@ -107,7 +107,9 @@ exports.updateToConfirm = async (req, res, next) => {
 
     const getNumofpeople = await ListService.getNumofpeople({
       bookTime,
-      confirm: 1
+      confirm: 1,
+      cancel: 0,
+      depositCompleted: 1
     });
     const num =
       getNumofpeople && getNumofpeople.numofpeople

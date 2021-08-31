@@ -53,13 +53,13 @@ exports.getDataBetweenDays = (startDate, endDate, conditions) => {
   });
 };
 
-exports.getNumofpeople = time => {
+exports.getNumofpeople = data => {
   return List.findOne({
     attributes: [
       sequelize.col("bookTime"),
       [sequelize.fn("sum", sequelize.col("numofpeople")), "numofpeople"]
     ],
-    where: time,
+    where: data,
     group: ["bookTime"],
     raw: true
   });
