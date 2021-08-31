@@ -164,9 +164,7 @@ const Detail = props => {
       const data = await axios.post(
         "/api/list/getNumofpeople",
         {
-          bookTime: moment(new Date(date + " " + time)).format(
-            "YYYY-MM-DD HH:mm:ss"
-          ),
+          bookTime: new Date(date + " " + time),
           confirm: 1,
           cancel: 0,
           depositCompleted: 1
