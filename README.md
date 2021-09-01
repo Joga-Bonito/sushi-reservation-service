@@ -4,6 +4,11 @@ ReactJS를 사용한 예약 노쇼 방지를 위해 예약비를 받고 예약�
 <br/>
 ![ex_screenshot](./images/first_view.png)
 <br/>
+유저가 예약 후 관리자가 승인해야 Home에 반영됩니다.
+<br/>
+![ex_screenshot](./images/admin_view.png)
+<br/>
+<br/>
 <br/>
 
 ## 배포되어 있는 사이트

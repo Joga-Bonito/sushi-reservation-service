@@ -5,6 +5,12 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const { sequelize } = require("./models");
 const routes = require("./routes");
+const http = require("http");
+
+setInterval(() => {
+  // heroku sleep 방지
+  http.get("http://sushi-reservation-service.herokuapp.com");
+}, 1000 * 60 * 10);
 
 sequelize
   .sync({ force: false })
