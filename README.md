@@ -101,7 +101,6 @@ yarn dev
 | models       | DB에 접근한다                                                                                             |
 | routes       | 요청에 따른 라우터 분리 및 라우팅                                                                         |
 | server.js    | express로 서버를 생성                                                                                     |
-| app.js       | express 서버 middleware 적용                                                                              |
 
 ## 비지니스 룰
 
@@ -112,3 +111,5 @@ yarn dev
 - 10개의 바 형식의 자리
 
 - 하루 최대 예약 가능 인원 : 40명
+
+- 유저가 예약 후 관리자페이지에서 승인해야 Home에 반영됨

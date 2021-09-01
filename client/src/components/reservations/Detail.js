@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import moment from "moment";
 
 const Content = styled.div`
   margin: 0 auto;
