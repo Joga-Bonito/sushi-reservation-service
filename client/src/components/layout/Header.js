@@ -5,6 +5,7 @@ import SideBar from "./SideBar";
 import DarkBackground from "./DarkBackground";
 import { useSelector } from "react-redux";
 import sushi_icon from "../../img/sushi_icon(1).png";
+import axios from "axios";
 
 const NavBar = styled.div`
     padding: 0;
@@ -47,21 +48,39 @@ const MainTab = styled.div`
   align-items: center;
   a {
     color: #333333;
-    font-size: 18px;
+    font-size: 14px;
     padding: 5px 5px;
     cursor: pointer;
     position: relative;
+  }
+  a:hover {
+    color: grey;
   }
   a > img {
     width: 24px;
   }
   .goIn a {
-    color: #3540a5;
+    color: #333333;
     font-size: 14px;
+  }
+  .goIn a:hover {
+    color: grey;
   }
   .goIn span {
     font-size: 12px;
     color: #999;
+  }
+  .btn {
+    width: 80px;
+    height: 30px;
+    border: none;
+    background-color: white;
+    color: #333333;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .btn:hover {
+    color: grey;
   }
 `;
 
@@ -89,6 +108,19 @@ const Header = () => {
   const [sidebarAppear, setSidebarAppear] = useState(false);
   const sideBarRef = useRef();
 
+  const logout = () => {
+    let dataToSubmit = {
+      email: status.email,
+      name: status.name
+    };
+    axios
+      .post("/api/user/logout", dataToSubmit, { withCredentials: true })
+      .then(res => {
+        window.location.replace("/");
+      })
+      .catch(err => {});
+  };
+
   return (
     <NavBar>
       <NavContainer>
@@ -108,13 +140,18 @@ const Header = () => {
                 {status?.isAdmin ? (
                   <div className="goIn">
                     <Link to="/admin">관리자 페이지</Link>
-                    <span>5분 후 자동 로그아웃 됩니다.</span>
+                    <button className="btn logout" onClick={logout}>
+                      로그아웃
+                    </button>
                   </div>
                 ) : (
                   <>
                     <Link to="/mypage">
                       <img src={sushi_icon} alt="초밥" />
                     </Link>
+                    <button className="btn logout" onClick={logout}>
+                      로그아웃
+                    </button>
                   </>
                 )}
               </>

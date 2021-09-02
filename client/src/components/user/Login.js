@@ -115,7 +115,7 @@ const Login = props => {
     };
 
     axios
-      .post("api/user/login", dataToSubmit, { withCredentials: true })
+      .post("/api/user/login", dataToSubmit, { withCredentials: true })
       .then(response => {
         if (response.data.loginSuccess) {
           //props.history.push("/login");

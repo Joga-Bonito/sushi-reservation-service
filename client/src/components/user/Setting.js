@@ -126,7 +126,7 @@ const Setting = ({ user }) => {
   useEffect(() => {
     async function getUserData() {
       const data = await axios.post(
-        "api/user/getUserData",
+        "/api/user/getUserData",
         {
           email: user?.email
         },
@@ -163,7 +163,7 @@ const Setting = ({ user }) => {
       };
 
       axios
-        .post("api/user/update", userData, { withCredentials: true })
+        .post("/api/user/update", userData, { withCredentials: true })
         .then(response => {
           if (response.data.updateSuccess) {
             window.location.replace("/mypage");

@@ -93,7 +93,6 @@ exports.read = async (req, res, next) => {
 
     res
       .cookie("jwt", token, {
-        // maxAge: 1000 * 60 * 30, // 30분 유지
         expires: new Date(Date.now() + 120000),
         httpOnly: true // You can't access these tokens in the client's javascript
       })
@@ -159,6 +158,23 @@ exports.getUserData = async (req, res, next) => {
 
     const getUserData = await UserService.findUserByEmail(email);
     res.status(200).send({ data: getUserData });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.logout = (req, res, next) => {
+  try {
+    const { email, name } = req.body;
+
+    const token = jwt.sign({ email, name }, secretKey, jwtOptions);
+    res
+      .cookie("jwt", token, {
+        expires: new Date(Date.now() + 100), //1초 미만으로 세팅해서 로그아웃처리
+        httpOnly: true // You can't access these tokens in the client's javascript
+      })
+      .status(200)
+      .send({ logoutSuccess: true });
   } catch (err) {
     next(err);
   }

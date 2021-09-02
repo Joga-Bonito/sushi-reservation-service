@@ -6,7 +6,7 @@ import AfterDeposit from "./AfterDeposit";
 import DetailReservation from "./DetailReservation";
 
 const ReservationManagementBlock = styled.div``;
-const SideNavContainer = styled.div`
+const InsideNavContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom : 50px;
@@ -38,7 +38,7 @@ const RouteResult = styled.div``;
 const ReservationManagement = () => {
   return (
     <ReservationManagementBlock>
-      <SideNavContainer>
+      <InsideNavContainer>
         <ul>
           <li>
             <NavLink to="/admin/reservationManagement/beforeDeposit">
@@ -51,7 +51,7 @@ const ReservationManagement = () => {
             </NavLink>
           </li>
         </ul>
-      </SideNavContainer>
+      </InsideNavContainer>
       <RouteResult>
         <Switch>
           <Route

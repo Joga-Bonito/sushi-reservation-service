@@ -73,7 +73,7 @@ const AdminHome = ({ user }) => {
                 예약 관리
               </NavLink>
               <NavLink to="/admin/refundManagement" activeClassName="active">
-                환불 관리
+                취소 관리
               </NavLink>
               <NavLink to="/admin/usersManagement" activeClassName="active">
                 회원 관리

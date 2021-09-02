@@ -205,7 +205,7 @@ const Detail = props => {
       window.location.replace("/login");
     }
     axios
-      .post("api/list/book", dataToSubmit, { withCredentials: true })
+      .post("/api/list/book", dataToSubmit, { withCredentials: true })
       .then(response => {
         if (response.data.reservationSuccess) {
           alert("예약이 완료되었습니다");

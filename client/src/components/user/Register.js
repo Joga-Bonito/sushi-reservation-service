@@ -152,7 +152,7 @@ const Register = props => {
     };
 
     axios
-      .post("api/user/register", dataToSubmit, { withCredentials: true })
+      .post("/api/user/register", dataToSubmit, { withCredentials: true })
       .then(response => {
         if (response.data.registerSuccess) {
           //props.history.push("/login");
@@ -188,7 +188,7 @@ const Register = props => {
                       onChange={e => {
                         setName(e.target.value);
                       }}
-                      minLength="3"
+                      minLength="2"
                       maxLength="10"
                       required
                     />
@@ -227,7 +227,7 @@ const Register = props => {
                     <input
                       type="password"
                       id="password"
-                      placeholder="Enter your password"
+                      placeholder="Enter your password (8~15자)"
                       value={password}
                       onChange={e => {
                         setPassword(e.target.value);
@@ -243,7 +243,7 @@ const Register = props => {
                     <input
                       type="password"
                       id="confirmPassword"
-                      placeholder="Enter your confirmPassword"
+                      placeholder="Enter your confirmPassword(8~15자)"
                       value={confirmPassword}
                       onChange={e => {
                         setConfirmPassword(e.target.value);

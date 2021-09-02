@@ -125,7 +125,7 @@ const MyReservations = ({ user }) => {
     async () => {
       try {
         const data = await axios.post(
-          `api/list/getDataByConditions`,
+          `/api/list/getDataByConditions`,
           { email: user?.email, confirm: tabValue },
           {
             withCredentials: true
